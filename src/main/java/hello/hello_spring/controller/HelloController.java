@@ -1,7 +1,6 @@
 package hello.hello_spring.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,6 +41,7 @@ public class HelloController {
         public String getName() {
             return name;
         }
+
         public void setName(String name) {
             this.name = name;
         }
