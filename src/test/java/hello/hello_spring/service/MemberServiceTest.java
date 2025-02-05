@@ -7,13 +7,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Fail.fail;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class MemberServiceTest {
 
     MemberService memberService;
-    MemoryMemberRepository memberRepository;
+    MemoryMemberRepository memberRepository; // 클리어하기 위해서 가져옴(afterEach)
 
     @BeforeEach
     public void beforeEach(){
@@ -33,7 +34,7 @@ class MemberServiceTest {
         member.setName("hello");
 
         //when
-        Long saveId = memberService.join(member);
+        Long saveId = memberService.join(member); // 맴버 id반환 -> 1
 
         //then
         Member findMember = memberService.findOne(saveId).get();
@@ -52,8 +53,14 @@ class MemberServiceTest {
         //when
         memberService.join(member1);
         IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
+        //join에서 예외발생 -> IllegalStateException이 발생했냐,발생함 ㅇㅇ -> 테스트 코드 통과
         assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
-
+        /*try{
+            memberService.join(member2); // 예외 발생
+            fail();
+        } catch (IllegalStateException e){ // e -> 이미 존재하는 회원입니다.
+            //assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+        }*/
         //then
     }
 
