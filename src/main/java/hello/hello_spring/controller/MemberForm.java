@@ -1,7 +1,7 @@
 package hello.hello_spring.controller;
 
 public class MemberForm {
-    private String name;
+    private String name; // spring
 
     public String getName() {
         return name;
@@ -10,6 +10,4 @@ public class MemberForm {
     public void setName(String name) {
         this.name = name;
     }
-
-
 }
